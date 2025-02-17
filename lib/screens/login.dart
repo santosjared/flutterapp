@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 60),
+                const SizedBox(height: 90),
                 Text(
                   'BIENVENIDO A FELCC POTOSÍ - BOLIVIA',
                   style: TextStyle(
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ? CircularProgressIndicator(
                               color: Colors.green,
                             )
-                            : LoginButton(
+                            : CustomButton(
                                 text: 'Iniciar sesión',
                                 onPressed: _login,
                               ),

@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 
-class LoginButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final String text;
   final Function onPressed;
 
-  const LoginButton({super.key, required this.text, required this.onPressed});
+  const CustomButton({super.key, required this.text, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

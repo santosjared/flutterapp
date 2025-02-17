@@ -1,3 +1,4 @@
+import 'package:app_flutter/widgets/type_complaints.dart';
 import 'package:flutter/material.dart';
 // Asegúrate de importar el modelo
 
@@ -12,7 +13,7 @@ class DashboardScreen extends StatelessWidget {
       backgroundColor: Color.fromARGB(255, 0, 142, 150),
       foregroundColor: Colors.white,
       ),
-      body: const Center(child: Text('Bienvenido al Dashboard')),
+      body: TypeComplaints(),
       drawer: Drawer(
         shape: const  RoundedRectangleBorder(
           borderRadius: BorderRadius.zero,
