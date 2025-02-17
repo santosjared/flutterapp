@@ -21,36 +21,35 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   bool _obscureText = true;
 
- void _login() async {
-  setState(() {
-    isLoading = true;
-  });
+  void _login() async {
+    setState(() {
+      isLoading = true;
+    });
 
-  User user = User(
-    email: emailController.text,
-    name: '',
-    password: passwordController.text,
-  );
-
-  bool success = await authService.login(user);
-
-  setState(() {
-    isLoading = false;
-  });
-
-  if (success) {
-    // Navegar al Dashboard y reemplazar Login
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const DashboardScreen()),
+    User user = User(
+      email: emailController.text,
+      name: '',
+      password: passwordController.text,
     );
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Credenciales incorrectas')),
-    );
+
+    bool success = await authService.login(user);
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (success) {
+      // Navegar al Dashboard y reemplazar Login
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Credenciales incorrectas')),
+      );
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -76,19 +75,18 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 90),
                 Text(
-                  'BIENVENIDO A FELCC POTOSÍ - BOLIVIA',
+                  'BIENVENIDO A RADIO PATRULLA 110 POTOSÍ - BOLIVIA',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: const Color.fromARGB(255, 0, 142, 73),
                   ),
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 10),
                 Text(
                   'Denuncia cualquier hecho delictivo de forma rápida y segura. '
                   'Nuestra plataforma está diseñada para brindarte un acceso directo a las autoridades.',
@@ -97,77 +95,69 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: const Color.fromARGB(248, 1, 92, 12),
                   ),
                 ),
-                Expanded(
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CustomInputField(
-                          labelText: 'Correo electrónico',
-                          controller: emailController,
-                          prefixIcon: Icon(Icons.person, color: Colors.green),
-                        ),
-                        CustomInputField(
-                          labelText: 'Contraseña',
-                          controller: passwordController,
-                          prefixIcon: Icon(Icons.lock, color: Colors.green),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _obscureText
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: Colors.green,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _obscureText = !_obscureText;
-                              });
-                            },
-                          ),
-                          obscureText: _obscureText,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text('ingresar invitado'),
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text('¿Olvidó su contraseña?'),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        isLoading
-                            ? CircularProgressIndicator(
-                              color: Colors.green,
-                            )
-                            : CustomButton(
-                                text: 'Iniciar sesión',
-                                onPressed: _login,
-                              ),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '¿No tiene una cuenta?',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: const Color.fromARGB(248, 1, 92, 12),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text('Registrarse'),
-                            ),
-                          ],
-                        ),
-                      ],
+                 const SizedBox(height: 20),
+                CustomInputField(
+                  labelText: 'Correo electrónico',
+                  controller: emailController,
+                  prefixIcon: Icon(Icons.person, color: Colors.green),
+                ),
+                CustomInputField(
+                  labelText: 'Contraseña',
+                  controller: passwordController,
+                  prefixIcon: Icon(Icons.lock, color: Colors.green),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility_off : Icons.visibility,
+                      color: Colors.green,
                     ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
                   ),
+                  obscureText: _obscureText,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('ingresar invitado'),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('¿Olvidó su contraseña?'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child:  isLoading
+                    ? CircularProgressIndicator(
+                        color: Colors.green,
+                      )
+                    : CustomButton(
+                        text: 'Iniciar sesión',
+                        onPressed: _login,
+                      ),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '¿No tiene una cuenta?',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: const Color.fromARGB(248, 1, 92, 12),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Registrarse'),
+                    ),
+                  ],
                 ),
               ],
             ),

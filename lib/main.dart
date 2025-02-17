@@ -1,5 +1,6 @@
 // lib/main.dart
 
+import 'package:app_flutter/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/login.dart';
 
@@ -13,12 +14,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login',
+      title: 'Radio patrulla 110',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginScreen(),
+      initialRoute: '/login',
+      routes: {
+        '/':(context)=>DashboardScreen(),
+        '/login':(context)=>LoginScreen()
+      },
     );
   }
 }
