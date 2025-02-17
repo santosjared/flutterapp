@@ -1,0 +1,21 @@
+# Flutter/Dart
+.dart_tool/
+.build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+.packages
+pubspec.lock
+ios/Pods/
+android/.gradle/
+android/app/debug.keystore
+.idea/
+.vscode/
+*.iml
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Caché de Flutter
+build/
