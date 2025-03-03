@@ -25,20 +25,9 @@ class CustomInputField extends StatelessWidget {
         obscureText: obscureText,
         decoration: InputDecoration(
           labelText: labelText,
-          labelStyle: const TextStyle(color:Color.fromARGB(255, 0, 142, 73)),
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon, 
-           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color.fromARGB(255, 0, 121, 62), width: 2.0),
-            borderRadius: BorderRadius.circular(8),
-          ),
-           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.green, width: 2.5),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          fillColor: const Color.fromARGB(255, 248, 255, 248),
         ),
-        style: const TextStyle(color: Colors.black),
       ),
     );
   }

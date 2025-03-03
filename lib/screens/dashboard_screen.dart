@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 class DashboardScreen extends StatelessWidget {
 
   const DashboardScreen({super.key});
+  
+  get onChanged => null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Denuncias'), 
+      appBar: AppBar(title: const Text('Inicio'), 
       backgroundColor: Color.fromARGB(255, 0, 142, 150),
       foregroundColor: Colors.white,
       ),
@@ -46,6 +48,54 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
+            ListTile(
+              leading: const Icon(Icons.account_circle),
+              title: Text('Perfil'),
+            ),
+            Divider(),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: Text('Inicio'),
+            ),
+             ListTile(
+              leading: const Icon(Icons.edit),
+              title: Text('Realizar denucias'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/complaints');
+              },
+            ),
+             ListTile(
+              leading: const Icon(Icons.send),
+              title: Text('Denuncias aceptadas'),
+            ),
+             ListTile(
+              leading: const Icon(Icons.error),
+              title: Text('Denuncias rechazadas'),
+            ),
+             ListTile(
+              leading: const Icon(Icons.history),
+              title: Text('Historial de denuncias'),
+            ),
+            Divider(),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: Text('Configuraciones'),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Boton de emergencia '),
+                Switch(value: false, onChanged: onChanged,
+              activeColor: Colors.lightBlue, // Color del "thumb" (botón)
+              // activeTrackColor: Palette.lightPrimary, // Color del fondo cuando está activo
+              inactiveThumbColor: const Color.fromARGB(255, 52, 210, 28), // Color del botón cuando está apagado
+              inactiveTrackColor: const Color.fromARGB(255, 1, 102, 15),
+                
+                ),
+              ],
+            ),
+            Divider(),
             ListTile(
               leading: const Icon(Icons.logout),
               title: const Text('Cerrar sesión'),

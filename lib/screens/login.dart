@@ -1,15 +1,14 @@
 import 'package:app_flutter/screens/dashboard_screen.dart';
+import 'package:app_flutter/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/user.dart';
 import '../services/auth_service.dart';
-import '../widgets/custom_input.dart';
-import '../widgets/custom_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
 
@@ -39,7 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     if (success) {
-      // Navegar al Dashboard y reemplazar Login
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const DashboardScreen()),
@@ -54,76 +52,73 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Imagen de fondo
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/backrundLogin.png',
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Center(
-                  child: Text(
-                    '',
-                    style:
-                        TextStyle(color: const Color.fromARGB(255, 14, 14, 14)),
-                  ),
-                );
-              },
-            ),
-          ),
-          Padding(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'BIENVENIDO A RADIO PATRULLA 110 POTOSÍ - BOLIVIA',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(255, 0, 142, 73),
+                // Sección del título
+                Center(
+                  child: Text(
+                    'BIENVENIDO A RADIO PATRULLA 110 POTOSÍ - BOLIVIA',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      // color: Palette.lightPrimary,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10),
                 Text(
                   'Denuncia cualquier hecho delictivo de forma rápida y segura. '
                   'Nuestra plataforma está diseñada para brindarte un acceso directo a las autoridades.',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
-                    color: const Color.fromARGB(248, 1, 92, 12),
+                    // color: Palette.lightPrimary,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                 const SizedBox(height: 20),
-                CustomInputField(
-                  labelText: 'Correo electrónico',
+                const SizedBox(height: 20),
+                TextField(
                   controller: emailController,
-                  prefixIcon: Icon(Icons.person, color: Colors.green),
+                  decoration: InputDecoration(
+                      labelText: 'Correo electrónico',
+                      prefixIcon: Icon(Icons.person)),
                 ),
-                CustomInputField(
-                  labelText: 'Contraseña',
+                const SizedBox(height: 16.0),
+                TextField(
                   controller: passwordController,
-                  prefixIcon: Icon(Icons.lock, color: Colors.green),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscureText ? Icons.visibility_off : Icons.visibility,
-                      color: Colors.green,
+                  decoration: InputDecoration(
+                    labelText: 'Contraseña',
+                    prefixIcon: Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
                   ),
                   obscureText: _obscureText,
                 ),
+
+                // Botón de login y enlaces adicionales
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
-                      onPressed: () {},
-                      child: const Text('ingresar invitado'),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/');
+                      },
+                      child: const Text('Ingresar invitado'),
                     ),
                     TextButton(
                       onPressed: () {},
@@ -133,16 +128,40 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 10),
                 Center(
-                  child:  isLoading
-                    ? CircularProgressIndicator(
-                        color: Colors.green,
-                      )
-                    : CustomButton(
-                        text: 'Iniciar sesión',
-                        onPressed: _login,
-                      ),
+                  child: isLoading
+                      ? const CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: _login,
+                          child: Text('Iniciar sesión'),
+                        ),
                 ),
                 const SizedBox(height: 10),
+                CustomDivider(text: 'o iniciar sesión con'),
+                const SizedBox(height: 10),
+
+                // Botones de redes sociales
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: const FaIcon(FontAwesomeIcons.google,
+                          color: Colors.red),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const FaIcon(FontAwesomeIcons.facebook,
+                          color: Colors.blue),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const FaIcon(FontAwesomeIcons.xTwitter),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+
+                // Enlace de registro
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -150,11 +169,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       '¿No tiene una cuenta?',
                       style: TextStyle(
                         fontSize: 15,
-                        color: const Color.fromARGB(248, 1, 92, 12),
+                        // color: Palette.lightPrimary,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, '/register');
+                      },
                       child: const Text('Registrarse'),
                     ),
                   ],
@@ -162,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

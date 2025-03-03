@@ -10,13 +10,8 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style = ElevatedButton.styleFrom(
-      backgroundColor: const Color.fromARGB(255, 0, 155, 80),
-      foregroundColor: Colors.white
-      );
     return ElevatedButton(
       onPressed: () => onPressed(),
-      style: style,
       child: Text(text),
     );
   }
